@@ -25,4 +25,5 @@ pub struct Ticket {
     pub title: TicketTitle,
     pub description: TicketDescription,
     pub status: Status,
+
 }

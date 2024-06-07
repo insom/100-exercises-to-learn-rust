@@ -10,28 +10,36 @@ pub struct Ticket {
 }
 
 impl Ticket {
-    pub fn new(title: String, description: String, status: String) -> Ticket {
+    pub fn set_title(&mut self, title: String) {
         if title.is_empty() {
             panic!("Title cannot be empty");
         }
         if title.len() > 50 {
             panic!("Title cannot be longer than 50 bytes");
         }
+        self.title = title
+    }
+    pub fn set_description(&mut self, description: String) {
         if description.is_empty() {
             panic!("Description cannot be empty");
         }
         if description.len() > 500 {
             panic!("Description cannot be longer than 500 bytes");
         }
+        self.description = description
+    }
+    pub fn set_status(&mut self, status: String) {
         if status != "To-Do" && status != "In Progress" && status != "Done" {
             panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
         }
-
-        Ticket {
-            title,
-            description,
-            status,
-        }
+        self.status = status
+    }
+    pub fn new(title: String, description: String, status: String) -> Ticket {
+        let mut t = Ticket { title: "".into(), description: "".into(), status: "".into() };
+        t.set_title(title);
+        t.set_description(description);
+        t.set_status(status);
+        t
     }
 
     pub fn title(&self) -> &String {

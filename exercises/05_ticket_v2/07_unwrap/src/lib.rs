@@ -1,8 +1,15 @@
+use std::error;
+
 // TODO: `easy_ticket` should panic when the title is invalid.
 //   When the description is invalid, instead, it should use a default description:
 //   "Description not provided".
 fn easy_ticket(title: String, description: String, status: Status) -> Ticket {
-    todo!()
+    let t = Ticket::new(title.clone(), description, status.clone());
+    match t {
+        Ok(tick) => tick,
+        Err(error) if error.starts_with("Description") => Ticket::new(title, "Description not provided".into(), status).unwrap(),
+        Err(error) => { panic!("{}", error) },
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]
