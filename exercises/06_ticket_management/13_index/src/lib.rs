@@ -32,6 +32,22 @@ pub enum Status {
     Done,
 }
 
+impl std::ops::Index<TicketId> for TicketStore {
+    type Output = Ticket;
+    fn index(&self, index: TicketId) -> &Self::Output {
+        self.get(index).unwrap()
+        
+    }
+}
+
+impl std::ops::Index<&TicketId> for TicketStore {
+    type Output = Ticket;
+    fn index(&self, index: &TicketId) -> &Self::Output {
+        self.get(index.clone()).unwrap()
+        
+    }
+}
+
 impl TicketStore {
     pub fn new() -> Self {
         Self {
